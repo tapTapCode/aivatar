@@ -1,0 +1,39 @@
+template_version: "1.0"
+name: default
+width: 1920
+height: 1080
+fps: 30
+background_color: "#10131A"
+presenter_fit: cover
+presenter_position: center
+split:
+  orientation: horizontal
+  avatar_side: left
+  avatar_ratio: 0.42
+  visual_ratio: 0.58
+  divider_width_px: 4
+  divider_color: "#FFFFFF"
+  safe_margin_px: 48
+  avatar_crop: medium_closeup
+  visual_fit: cover
+captions:
+  enabled: true
+  font: DejaVu Sans
+  size_px: 48
+  color: "#FFFFFF"
+  stroke_color: "#000000"
+  stroke_width_px: 3
+  bottom_margin_px: 72
+  max_chars_per_line: 42
+audio:
+  target_lufs: -16.0
+  true_peak_db: -1.5
+  background_music_lufs: -28.0
+  sample_rate: 48000
+intro_uri: null
+outro_uri: null
+logo_uri: null
+logo_position: top_right
+transitions: [cut, crossfade]
+static_visual_motion: slow_zoom
+
