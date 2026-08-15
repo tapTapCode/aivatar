@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AuthProviderMark } from "@/components/AuthProviderMark";
 import { authApi, ApiError } from "@/lib/api";
 import type { AuthConfig, Session } from "@/lib/types";
 
@@ -229,9 +230,7 @@ export function AuthScreen({
                           setNotice(disabledProviderNotice(provider.name));
                         }}
                       >
-                        <span className={`provider-mark ${key}-mark`}>
-                          {provider.name === "Google" ? "G" : "●"}
-                        </span>
+                        <AuthProviderMark name={provider.name} />
                         Continue with {provider.name}
                       </a>
                     );
