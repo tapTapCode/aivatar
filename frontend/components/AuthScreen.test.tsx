@@ -51,14 +51,17 @@ describe("AuthScreen", () => {
     expect(screen.getByRole("heading", { name: "Create your account" })).toBeInTheDocument();
     expect(screen.getByLabelText("Full name")).toBeInTheDocument();
     expect(screen.queryByText("Forgot password?")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("tab", { name: "Use SSO" }));
+    expect(screen.getByRole("link", { name: /Sign up with Google/ })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Sign up with Apple/ })).toBeInTheDocument();
   });
 
   it("explains disabled SSO providers", async () => {
     render(<AuthScreen onAuthenticated={vi.fn()} />);
     await userEvent.click(screen.getByRole("tab", { name: "Use SSO" }));
-    await userEvent.click(screen.getByRole("link", { name: /Continue with Google/ }));
+    await userEvent.click(screen.getByRole("link", { name: /Sign in with Google/ }));
     expect(screen.getByText(/Google SSO needs OAuth credentials/)).toBeInTheDocument();
-    await userEvent.click(screen.getByRole("link", { name: /Continue with Apple/ }));
+    await userEvent.click(screen.getByRole("link", { name: /Sign in with Apple/ }));
     expect(screen.getByText(/Apple sign-in is paused/)).toBeInTheDocument();
   });
 
@@ -76,11 +79,11 @@ describe("AuthScreen", () => {
     expect(
       await screen.findByText("Social sign-in expired. Start again from this page."),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Continue with Google/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Sign in with Google/ })).toHaveAttribute(
       "href",
       "/v1/auth/oauth/google?next=%2F",
     );
-    expect(screen.getByRole("link", { name: /Continue with Apple/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Sign in with Apple/ })).toHaveAttribute(
       "href",
       "/v1/auth/oauth/apple?next=%2F",
     );

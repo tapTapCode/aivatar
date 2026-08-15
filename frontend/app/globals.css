@@ -60,11 +60,47 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .auth-methods button { min-height: 40px; border: 0; border-radius: 8px; background: transparent; color: #75829b; font-size: 13px; font-weight: 680; }
 .auth-methods button[aria-selected="true"] { background: #162238; color: #f5f8ff; box-shadow: 0 3px 12px rgba(0,0,0,.2); }
 .oauth-options, .auth-form { display: grid; gap: 18px; }
-.oauth-button, .submit-button { display: flex; width: 100%; min-height: 50px; align-items: center; justify-content: center; gap: 12px; border: 1px solid #2a3652; border-radius: 11px; background: #0c1322; color: #eef4ff; font-weight: 680; transition: .18s ease; }
-.oauth-button:hover { border-color: #4e6da7; background: #111c31; }
-.oauth-button[aria-disabled="true"] { cursor: not-allowed; opacity: .45; }
-.provider-mark { display: grid; width: 20px; height: 20px; place-items: center; color: #fff; }
-.provider-mark svg { display: block; width: 20px; height: 20px; }
+.oauth-options { gap: 12px; }
+/* Official Google / Apple SSO chrome from Social Login Buttons + brand docs. */
+.oauth-button {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .25px;
+  line-height: 20px;
+  transition: box-shadow .18s ease, background-color .18s ease, opacity .18s ease;
+}
+.oauth-button.oauth-google {
+  background: #fff;
+  border: 1px solid #747775;
+  color: #1f1f1f;
+}
+.oauth-button.oauth-google:hover { box-shadow: 0 1px 2px rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15); }
+.oauth-button.oauth-apple {
+  background: #fff;
+  border: 1px solid #fff;
+  color: #000;
+}
+.oauth-button.oauth-apple:hover { background: #f7f7f7; }
+.oauth-button[aria-disabled="true"] { cursor: not-allowed; opacity: .38; }
+.oauth-button[aria-disabled="true"]:hover { box-shadow: none; background: #fff; }
+.provider-mark { display: grid; width: 20px; height: 20px; flex: 0 0 20px; place-items: center; color: inherit; }
+.provider-mark svg { display: block; width: 20px; height: 20px; fill: none; stroke: none; stroke-width: 0; }
+.provider-mark path { stroke: none; stroke-width: 0; }
+.provider-mark.apple-mark svg,
+.provider-mark.apple-mark path { fill: currentColor; }
+.provider-mark.google-mark path:nth-of-type(1) { fill: #4285F4; }
+.provider-mark.google-mark path:nth-of-type(2) { fill: #34A853; }
+.provider-mark.google-mark path:nth-of-type(3) { fill: #FBBC05; }
+.provider-mark.google-mark path:nth-of-type(4) { fill: #EA4335; }
 .auth-form > label:not(.check) { display: grid; gap: 8px; color: #cdd5e5; font-size: 13px; font-weight: 650; }
 .auth-form input:not([type="checkbox"]) { width: 100%; height: 50px; border: 1px solid #293550; border-radius: 10px; outline: 0; background: #0b111d; color: #f6f9ff; padding: 0 15px; }
 .auth-form input:not([type="checkbox"]):focus { border-color: #3baef2; box-shadow: 0 0 0 3px rgba(49,160,229,.12); }
@@ -73,7 +109,21 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .check { display: flex; align-items: flex-start; gap: 8px; color: #909db5; font-size: 12px; font-weight: 450; line-height: 1.5; }
 .check input { accent-color: #2caaf2; }
 .terms { margin: -3px 0 1px; }
-.submit-button { border-color: #268fe0; background: linear-gradient(135deg, #168ddc, #4068e7); color: white; box-shadow: 0 10px 28px rgba(25,117,224,.22); }
+.submit-button {
+  display: flex;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #268fe0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #168ddc, #4068e7);
+  color: white;
+  font-weight: 680;
+  box-shadow: 0 10px 28px rgba(25,117,224,.22);
+  transition: .18s ease;
+}
 .submit-button:hover { border-color: #64c4ff; transform: translateY(-1px); }
 .submit-button:disabled { cursor: wait; opacity: .62; transform: none; }
 .view-link { border: 0; padding: 0; background: none; color: #70c8ff; cursor: pointer; }
