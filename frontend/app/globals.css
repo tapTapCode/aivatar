@@ -63,7 +63,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .oauth-button, .submit-button { display: flex; width: 100%; min-height: 50px; align-items: center; justify-content: center; gap: 12px; border: 1px solid #2a3652; border-radius: 11px; background: #0c1322; color: #eef4ff; font-weight: 680; transition: .18s ease; }
 .oauth-button:hover { border-color: #4e6da7; background: #111c31; }
 .oauth-button[aria-disabled="true"] { cursor: not-allowed; opacity: .45; }
-.provider-mark { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: #fff; color: #111; font-size: 13px; font-weight: 800; }
+.provider-mark { display: grid; width: 20px; height: 20px; place-items: center; color: #fff; }
+.provider-mark svg { display: block; width: 20px; height: 20px; }
 .auth-form > label:not(.check) { display: grid; gap: 8px; color: #cdd5e5; font-size: 13px; font-weight: 650; }
 .auth-form input:not([type="checkbox"]) { width: 100%; height: 50px; border: 1px solid #293550; border-radius: 10px; outline: 0; background: #0b111d; color: #f6f9ff; padding: 0 15px; }
 .auth-form input:not([type="checkbox"]):focus { border-color: #3baef2; box-shadow: 0 0 0 3px rgba(49,160,229,.12); }
