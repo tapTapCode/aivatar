@@ -1,0 +1,3 @@
+# Install the pinned official FLUX.2 implementation in the image-specific build layer.
+# The revision must be supplied and recorded by the deployment; none is guessed here.
+
