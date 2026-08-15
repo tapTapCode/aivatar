@@ -37,6 +37,10 @@ function disabledProviderNotice(name: string) {
   return `${name} SSO needs OAuth credentials before it can be used.`;
 }
 
+function oauthActionLabel(view: View, name: string) {
+  return `${view === "register" ? "Sign up" : "Sign in"} with ${name}`;
+}
+
 export function AuthScreen({
   onAuthenticated,
 }: {
@@ -220,7 +224,7 @@ export function AuthScreen({
                       : "#";
                     return (
                       <a
-                        className="oauth-button"
+                        className={`oauth-button oauth-${key}`}
                         aria-disabled={!provider.enabled}
                         href={href}
                         key={provider.name}
@@ -231,7 +235,7 @@ export function AuthScreen({
                         }}
                       >
                         <AuthProviderMark name={provider.name} />
-                        Continue with {provider.name}
+                        <span>{oauthActionLabel(view, provider.name)}</span>
                       </a>
                     );
                   })}
