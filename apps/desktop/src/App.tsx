@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import type { Session } from "./lib/types";
 import { Dashboard } from "./components/Dashboard";
+import { OnboardingTour } from "./components/OnboardingTour";
 import appStyles from "./styles.module.css";
 import channelStyles from "./channel-studio.module.css";
 
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <div className={`${appStyles.moduleAnchor} ${channelStyles.channelModuleAnchor}`}>
+    <OnboardingTour />
     <Dashboard
       user={session.user}
       csrfToken={session.csrf_token}
