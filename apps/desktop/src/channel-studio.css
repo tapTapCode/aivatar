@@ -4,6 +4,50 @@
 
 .cs-commercial{margin-top:28px;padding-top:22px;border-top:1px solid var(--cs-line)}.cs-commercial h3{margin-bottom:14px}.cs-commercial-stats{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--cs-muted)}.cs-commercial-stats b{font-size:19px;color:var(--cs-ink)}
 
+/* Keep every compact control on the same visual baseline. Base UI primitives
+   expose different internal elements, so the alignment is normalized here. */
+.channel-studio .btn,
+.channel-studio .base-select-trigger,
+.channel-studio .base-tab,
+.channel-studio .base-accordion-trigger,
+.channel-studio .cs-list-item,
+.channel-studio .cs-link {
+  line-height: 1.2;
+}
+.channel-studio .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+.channel-studio .base-select-trigger {
+  min-height: 36px;
+  align-items: center;
+  line-height: 1.2;
+}
+.channel-studio .base-select-trigger > *,
+.channel-studio .base-select-trigger [data-popup-open] {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.channel-studio .base-select-trigger [data-slot="icon"] {
+  height: 16px;
+  justify-content: center;
+}
+.channel-studio .base-select-trigger > span:last-child {
+  transform: translateY(1px);
+}
+.channel-studio .cs-list-item {
+  align-items: center;
+}
+.channel-studio .cs-list-item > span:last-child,
+.channel-studio .cs-section-heading > button,
+.channel-studio .cs-actions > .btn {
+  display: inline-flex;
+  align-items: center;
+}
+
 .base-label{display:block;margin-bottom:7px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--cs-muted)}.base-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-width:180px;padding:10px 12px;border:1px solid var(--cs-line);border-radius:8px;background:#fff;color:var(--cs-ink);font:inherit;text-align:left;cursor:pointer}.base-select-trigger:focus-visible,.base-tab:focus-visible,.base-accordion-trigger:focus-visible,.base-checkbox:focus-visible,.base-slider-thumb:focus-visible{outline:3px solid #c9b9ff;outline-offset:2px}.base-select-positioner{z-index:120}.base-select-popup{min-width:var(--anchor-width);max-height:280px;overflow:auto;padding:5px;border:1px solid var(--cs-line);border-radius:10px;background:#fff;box-shadow:0 14px 35px #241d351f}.base-select-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 10px;border-radius:6px;font-size:13px;cursor:pointer}.base-select-item[data-highlighted]{background:#f0edfb;color:var(--cs-purple);outline:none}.base-select-item[data-selected]{font-weight:700}.base-tabs{margin:6px 0 24px}.base-tabs-list{position:relative;display:flex;gap:24px;border-bottom:1px solid var(--cs-line)}.base-tab{position:relative;padding:12px 0;border:0;background:none;color:var(--cs-muted);font:inherit;font-size:13px;cursor:pointer}.base-tab[data-active]{color:var(--cs-ink);font-weight:700}.base-tabs-indicator{position:absolute;bottom:-1px;height:2px;background:var(--cs-purple);transition:transform .2s,width .2s}.base-accordion{margin:22px 0;border-block:1px solid var(--cs-line)}.base-accordion-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 0;border:0;background:none;color:var(--cs-ink);font:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer}.base-accordion-trigger[data-panel-open] span{transform:rotate(180deg)}.base-accordion-trigger span{transition:transform .2s}.base-accordion-panel{padding:0 0 16px}.base-checkbox-label{gap:9px;align-items:center!important;cursor:pointer}.base-checkbox{display:grid;place-items:center;width:17px;height:17px;flex:0 0 17px;margin-top:0;border:1px solid #bcb3ca;border-radius:4px;background:#fff;color:#fff;cursor:pointer}.base-checkbox[data-checked]{border-color:var(--cs-purple);background:var(--cs-purple)}.base-checkbox:disabled{opacity:.5}.base-checkbox [data-indicator]{font-size:11px;line-height:1}.base-slider{width:100%;padding:8px 0}.base-slider-control{height:18px;display:flex;align-items:center}.base-slider-track{position:relative;width:100%;height:4px;border-radius:99px;background:#e7e2ed}.base-slider-indicator{position:absolute;height:100%;border-radius:99px;background:var(--cs-purple)}.base-slider-thumb{width:18px;height:18px;border:2px solid #fff;border-radius:50%;background:var(--cs-purple);box-shadow:0 1px 4px #34265240}
 .channel-studio>.cs-hero{color:#f6f7fb}.channel-studio>.cs-hero p{color:#aab1c1}.channel-studio>.cs-hero .cs-local{border-color:#596174;color:#cbd0dc}.channel-studio .base-tabs-list{border-bottom-color:#394052}.channel-studio .base-tab{color:#aab1c1}.channel-studio .base-tab[data-active]{color:#fff}.channel-studio .base-tabs-indicator{background:#55b8ff}
 
