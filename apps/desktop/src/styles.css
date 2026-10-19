@@ -455,3 +455,53 @@ dialog form { position: relative; width: min(420px,92vw); padding: 24px; }
 .tool-card:nth-child(2).featured{border-color:rgba(243,154,181,.34)}
 .template-thumb{background-color:var(--surface-2)}
 .basalt-banner{display:flex;align-items:center;gap:12px;margin:0 0 34px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(105deg,hsl(204 90% 70% / .1),hsl(345 88% 77% / .06) 68%,var(--surface));box-shadow:0 10px 24px rgba(0,0,0,.08)}.basalt-banner-mark{width:8px;height:8px;flex:0 0 auto;border-radius:50%;background:var(--basalt-primary-gradient);box-shadow:0 0 0 4px hsl(204 90% 70% / .08)}.basalt-banner-copy{display:grid;gap:3px;min-width:0;flex:1}.basalt-banner-copy strong{font-family:var(--font-display);font-size:13px}.basalt-banner-copy span{color:var(--muted);font-size:12px;line-height:1.45}.basalt-banner-action{flex:0 0 auto}.basalt-banner-success{background:linear-gradient(105deg,hsl(113 58% 70% / .1),hsl(204 90% 70% / .05) 68%,var(--surface))}.basalt-banner-warning{background:linear-gradient(105deg,hsl(49 100% 73% / .12),hsl(345 88% 77% / .06) 68%,var(--surface))}.basalt-inline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:12px}.basalt-inline span{color:var(--quiet);text-transform:uppercase;letter-spacing:.06em;font-size:10px}.basalt-inline strong{font-size:12px}@media(max-width:620px){.basalt-banner{align-items:flex-start;flex-wrap:wrap}.basalt-banner-action{margin-left:20px}}
+/* Driver.js onboarding is intentionally kept in the Aivatar visual system. */
+.aivatar-driver-popover {
+  max-width: min(360px, calc(100vw - 32px));
+  border: 1px solid rgba(121, 225, 255, 0.28);
+  border-radius: 14px;
+  background: #171a20;
+  color: #f3f5f7;
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  font-family: inherit;
+}
+
+.aivatar-driver-popover .driver-popover-title {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.aivatar-driver-popover .driver-popover-description {
+  color: #b8c0c9;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.aivatar-driver-popover .driver-popover-progress-text {
+  color: #88939f;
+  font-size: 11px;
+}
+
+.aivatar-driver-popover .driver-popover-navigation-btns button {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: #242a32;
+  color: #e9edf1;
+  font: inherit;
+  font-size: 12px;
+  padding: 7px 11px;
+  text-shadow: none;
+}
+
+.aivatar-driver-popover .driver-popover-navigation-btns .driver-popover-next-btn,
+.aivatar-driver-popover .driver-popover-navigation-btns .driver-popover-close-btn {
+  border-color: transparent;
+  background: linear-gradient(135deg, #19c6e9, #7e68ff 72%, #ef8daf);
+  color: #071016;
+  font-weight: 700;
+}
+
+.aivatar-driver-popover .driver-popover-close-btn {
+  color: #aeb8c3;
+}

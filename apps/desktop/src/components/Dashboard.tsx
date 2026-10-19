@@ -15,6 +15,7 @@ import { BaseTabs } from "./BaseControls";
 import { BasaltBanner } from "./BasaltPrimitives";
 import { ApiError, authApi, loadWorkspace, workspaceApi } from "../lib/api";
 import { STUDIO_PRESETS, TEMPLATES, WORKFLOWS, type StudioMode, type StudioPreset } from "../lib/studio";
+import { requestOnboardingTour } from "./OnboardingTour";
 import type {
   AuthUser,
   HeyGenCatalog,
@@ -478,7 +479,7 @@ export function Dashboard({
     <div className={navOpen ? "nav-open" : ""}>
       <a className="skip-link" href="#main">Skip to content</a>
       {navOpen && <button className="nav-backdrop" type="button" aria-label="Close navigation" onClick={() => setNavOpen(false)} />}
-      <div className="app-shell">
+      <div className="app-shell" data-tour="workspace">
         <aside className="sidebar" aria-label="Primary navigation">
           <div className="brand-row">
             <button className="brand" type="button" onClick={() => go("overview")} aria-label="Aivatar home">
@@ -486,7 +487,7 @@ export function Dashboard({
             </button>
             <button className="icon-btn sidebar-toggle" type="button" aria-label="Collapse navigation" onClick={() => setNavOpen(false)}><Icon name="close" /></button>
           </div>
-          <nav className="nav-groups">
+          <nav className="nav-groups" data-tour="navigation">
             <div className="nav-group">
               <p className="nav-label">Workspace</p>
               {nav.slice(0, 4).map(([key, label, icon]) => (
@@ -502,7 +503,7 @@ export function Dashboard({
           </nav>
           <div className="sidebar-footer">
             <button type="button" className={`nav-link${route === "settings" ? " is-active" : ""}`} onClick={() => go("settings")}><Icon name="settings" /><span>Settings</span></button>
-            <button type="button" className="nav-link" onClick={() => { setHelpOpen(true); setNavOpen(false); }}><Icon name="help" /><span>Help</span></button>
+            <button type="button" className="nav-link" data-tour="help" onClick={() => { setHelpOpen(true); setNavOpen(false); }}><Icon name="help" /><span>Help</span></button>
             <div className="workspace-card">
               <span className="avatar" aria-hidden="true">{initials}</span>
               <span className="workspace-user"><strong>{user.display_name}</strong><small>{user.email}</small></span>
@@ -548,7 +549,7 @@ export function Dashboard({
                   </div>
                 )}
               </div>
-              <button type="button" className="btn primary" onClick={() => setCreateOpen(true)}><Icon name="plus" /><span>Create</span></button>
+              <button type="button" className="btn primary" data-tour="create" onClick={() => setCreateOpen(true)}><Icon name="plus" /><span>Create</span></button>
             </div>
           </header>
           {alert.message && <div className={`alert ${alert.kind}`} role="status">{alert.message}</div>}
@@ -602,7 +603,7 @@ export function Dashboard({
               <li><strong>Review the result.</strong> Download the completed export and inspect its render status and cost.</li>
             </ol>
             <p className="muted tiny">Private team studio. Provider credentials stay server-side; browser-inspection bypasses are not used.</p>
-            <div className="dialog-actions"><button type="button" className="btn primary" onClick={() => setHelpOpen(false)}>Got it</button></div>
+            <div className="dialog-actions"><button type="button" className="btn secondary" onClick={() => { setHelpOpen(false); window.setTimeout(requestOnboardingTour, 150); }}>Restart tour</button><button type="button" className="btn primary" onClick={() => setHelpOpen(false)}>Got it</button></div>
           </form>
         </dialog>
       )}
@@ -677,13 +678,13 @@ function Overview({ jobs, loading, go, openStudio, openVideo }: { jobs: VideoJob
       <div className="basalt-activity"><span className="label">Latest activity</span>{jobs.length ? jobs.slice(0, 3).map((job) => <button className="basalt-activity-item" type="button" key={job.video_id} onClick={() => openVideo(job.video_id)}><span>{job.project_id}</span><b>{job.state.replaceAll("_", " ")}</b></button>) : <span className="muted tiny">Your first production will appear here.</span>}</div>
     </section>
     <BasaltBanner title="Your production system is ready" action={<button className="text-button" type="button" onClick={() => openStudio()}>Create a render →</button>}>Build from a preset, review the scene plan, then keep the final MP4 and its status in one workspace.</BasaltBanner>
-    <section className="section"><SectionHeading title="Create something new" copy="Each card opens a studio preset with the matching format already selected." /><div className="create-grid">
+    <section className="section" data-tour="create"><SectionHeading title="Create something new" copy="Each card opens a studio preset with the matching format already selected." /><div className="create-grid">
       {WORKFLOWS.map((item) => (
         <ToolCard key={item.id} title={item.eyebrow} copy={item.copy} icon={item.icon} featured={item.featured} onClick={() => openStudio(item.id)} />
       ))}
     </div></section>
-    <section className="section"><SectionHeading title="Recommended templates" copy="Reusable starting points for your next production."><button className="text-button" type="button" onClick={() => go("templates")}>Browse all</button></SectionHeading><div className="template-rail">{TEMPLATES.map((template) => <TemplateCard key={template.title} template={template} onSelect={() => openStudio(template.id)} />)}</div></section>
-    <section className="section"><SectionHeading title="Recent projects" copy={jobs.length ? "Your latest work, ready to continue." : "Your completed and in-progress work will appear here."}><button className="text-button" type="button" onClick={() => go("projects")}>See all</button></SectionHeading>
+    <section className="section" data-tour="templates"><SectionHeading title="Recommended templates" copy="Reusable starting points for your next production."><button className="text-button" type="button" onClick={() => go("templates")}>Browse all</button></SectionHeading><div className="template-rail">{TEMPLATES.map((template) => <TemplateCard key={template.title} template={template} onSelect={() => openStudio(template.id)} />)}</div></section>
+    <section className="section" data-tour="projects"><SectionHeading title="Recent projects" copy={jobs.length ? "Your latest work, ready to continue." : "Your completed and in-progress work will appear here."}><button className="text-button" type="button" onClick={() => go("projects")}>See all</button></SectionHeading>
       {jobs.length ? <div className="project-grid">{jobs.slice(0, 4).map((job) => <ProjectCard key={job.video_id} item={job} onOpen={() => openVideo(job.video_id)} />)}</div> : <div className="getting-started"><div><h2>Your workspace is ready</h2><p>Choose a format, add the required presenter or visual inputs, then approve the production before rendering starts.</p></div><div className="step-list"><span className="step"><b>1</b>Create</span><span className="step"><b>2</b>Review</span><span className="step"><b>3</b>Export</span></div></div>}
     </section>
   </>;
