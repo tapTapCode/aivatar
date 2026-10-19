@@ -1,71 +1,19 @@
 # Architecture
 
-## Runtime shape
+`Aivatar Desktop -> localhost Pipeline API -> SQLite/Queue -> provider jobs -> scene intermediates -> FFmpeg final -> QC`
 
-```mermaid
-flowchart LR
-  C["Client"] --> A["FastAPI control plane"]
-  A --> D["PostgreSQL production adapter"]
-  A --> Q["Redis job queue"]
-  Q --> O["Orchestrator"]
-  O --> T["TTS worker"]
-  O --> I["Image worker"]
-  O --> V["Video worker"]
-  O --> L["Lip-sync worker"]
-  O --> R["FFmpeg render worker"]
-  T --> S["S3-compatible asset store"]
-  I --> S
-  V --> S
-  L --> S
-  R --> S
-  O --> R
-  A --> S
-```
+The authoritative clock is `master_voice.wav`. Presenter-returned audio is not authoritative during final assembly. Presenter, image and video providers return assets that are conformed to the master scene boundaries.
 
-The local development path substitutes in-memory metadata/queue, local files, and deterministic
-mocks. Production deployment must provide durable database and object-storage adapters before
-multi-replica use.
+## Cost strategy
 
-## Exact scene route
+Use the cheapest acceptable visual path in this order: approved cached asset, FLUX still, FLUX still + FFmpeg motion, LTX motion when genuine motion materially improves the scene.
 
-```mermaid
-flowchart TD
-  X["Validated scene"] --> F{"visual_format"}
-  F -->|PRESENTER| P["TTS → avatar source → lip sync → avatar-only render"]
-  F -->|SPLIT| S["TTS + visual + avatar source → lip sync → configured split render"]
-  F -->|FULL_VISUAL| B["TTS + visual → full-frame render"]
-  P --> N["Normalized scene"]
-  S --> N
-  B --> N
-  N --> TL["Timeline assembly → ffprobe validation → storage"]
-```
+## External provider boundary
 
-Pydantic rejects invalid combinations and path-unsafe project/scene IDs before provider calls. The
-pipeline verifies returned asset lineage, repeats presence assertions immediately before render,
-and filtergraph construction rejects incompatible inputs. Static images receive configured
-slow-zoom/pan treatment; timeline joins use normalized cuts or FFmpeg `xfade`/`acrossfade`.
+Presenter and voice systems are adapters. HeyGen is the current primary presenter requirement, but the pipeline cannot require HeyGen in order to plan, generate mock assets, render, resume or validate a project.
 
-## Idempotency and resume
+## Phase 3 presenter boundary
 
-The API binds an `Idempotency-Key` to the owner and canonical request fingerprint. Reuse of the key
-with another payload returns conflict; replay returns the original job. Assets carry hashes and
-parent IDs. The content-addressed cache uses provider, model, revision, prompt, seed, resolution,
-steps, guidance, quantization, and settings. Atomic writes and hash verification prevent partial or
-colliding cache entries.
+Presenter clips are generated from exact slices of the authoritative master narration. `PRESENTER`, `SPLIT`, and `PIP` scenes all consume the same `PresenterProvider` interface. HeyGen-specific API versioning remains inside the adapter; local FFmpeg composition never depends on which presenter provider produced the clip.
 
-Durable stage-level resume requires persisting `JobRecord`, asset records, and completed stage
-outputs in PostgreSQL. The present in-memory repository demonstrates state semantics but cannot
-survive process loss.
-
-## Model lifecycle
-
-`ModelLifecycleManager` supports keep-warm, first-use, idle unloading, sequential execution, and
-CPU-offload strategy labels. It serializes access with configurable GPU slots. Worker supervisors
-must restart the process after unrecoverable CUDA errors. One heavyweight model per GPU is the safe
-default until profiling establishes compatible coexistence.
-
-## No ComfyUI production dependency
-
-All production boundaries are Python provider objects or internal JSON HTTP workers. `MODEL_ADAPTER`
-loads a pinned Python factory. The worker refuses readiness when the adapter is absent. ComfyUI is
-not installed, invoked, or referenced by any runtime command.
+For final assembly, presenter clip audio is discarded. The project-level master narration is always the final speech track.

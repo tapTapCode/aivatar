@@ -1,31 +1,27 @@
-.venv/
-.modal-venv/
-.DS_Store
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.ruff_cache/
-._*
+# Secrets and local environments
 .env
 .env.*
 !.env.example
-artifacts/
-assets/
-outputs/
-model-cache/
-benchmark-results/
-*.safetensors
-*.ckpt
-*.pth
-*.pt
-*.onnx
-.vercel
-.env*.local
-node_modules/
-*.tar.gz
-tmp/
-.kombai/
-continuous-avatar-10s-assets/
-recovered-avatar-assets/
-local-ai-video-proof-delivery/
-local-ai-video-pipeline-proof/
+.venv/
+
+# Local databases, caches, and generated media
+workspace/
+.pytest_cache/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Frontend dependencies and build output
+apps/desktop/node_modules/
+apps/desktop/dist/
+apps/desktop/.vite/
+
+# Native build output
+apps/desktop/src-tauri/target/
+
+# macOS metadata/resource forks
+.DS_Store
+._*
+
+# Local deployment state
+.vercel/

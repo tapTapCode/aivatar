@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/main.tsx","./src/studio.ts","./src/components/authprovidermark.tsx","./src/components/basaltprimitives.tsx","./src/components/basecontrols.tsx","./src/components/channelstudio.tsx","./src/components/dashboard.tsx","./src/lib/api.ts","./src/lib/studio.ts","./src/lib/types.ts"],"version":"5.9.3"}
