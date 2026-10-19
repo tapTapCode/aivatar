@@ -73,3 +73,56 @@
 .base-checkbox[data-checked]{border-color:var(--accent-2);background:var(--accent-2);color:#101214}
 .base-slider-track{background:var(--surface-3)}.base-slider-indicator,.base-slider-thumb{background:var(--accent-2)}
 .channel-studio{padding-bottom:24px}.cs-hero{padding:18px 0 20px}.cs-hero h1{font-size:clamp(23px,2.7vw,34px);margin:8px 0}.cs-hero p{font-size:13px}.cs-toolbar{gap:12px;padding:12px 16px;border-radius:12px}.cs-toolbar select{min-width:190px}.cs-tabs,.base-tabs{margin-bottom:18px}.cs-tabs{gap:20px}.base-tabs-list{gap:20px}.cs-card{padding:20px;border-radius:14px}.cs-columns{gap:18px}.cs-card h2{font-size:19px;margin:9px 0 17px}.cs-card h3{font-size:15px}.channel-studio label{gap:6px;margin:12px 0;font-size:11px}.channel-studio input:not([type=checkbox]):not([type=range]):not([type=color]),.channel-studio textarea,.channel-studio select{padding:9px 10px;font-size:13px}.channel-studio textarea{min-height:68px;line-height:1.5}.channel-studio .cs-script{min-height:190px}.cs-field-row{gap:12px}.cs-actions{gap:9px;margin-top:14px}.cs-muted{font-size:11px;line-height:1.55}.cs-empty{padding:26px 14px}.cs-empty p{font-size:13px}.cs-empty ol{gap:12px;margin:22px 16px;font-size:12px}.cs-orbit{width:60px;height:60px;border-radius:18px;font-size:25px}.base-select-trigger{min-width:160px;padding:8px 10px;font-size:13px}.base-select-item{padding:8px 9px;font-size:12px}.base-accordion{margin:17px 0}.base-accordion-trigger{padding:12px 0;font-size:12px}.base-accordion-panel{padding-bottom:12px}.base-checkbox-label{gap:7px}.base-checkbox{width:15px;height:15px;flex-basis:15px}.cs-stat-row{padding:15px 0}.cs-stat-row b{font-size:21px}.cs-scenes{margin:15px 0}.cs-scenes article{gap:11px;padding:12px 0}.cs-scenes p{font-size:12px;line-height:1.5;margin:5px 0}.cs-production{padding:18px 0}.cs-list-item{padding:14px 0;font-size:13px}.cs-character{gap:12px;padding:17px 0}.cs-commercial{margin-top:22px;padding-top:17px}.cs-commercial-stats b{font-size:17px}
+
+/* Channel Studio responsive layout: collapse the production workspace early,
+   then turn dense toolbars, forms, and result cards into touch-sized stacks. */
+@media (max-width: 900px) {
+  .channel-studio { padding-inline: 0; }
+  .cs-toolbar { flex-wrap: wrap; }
+  .cs-toolbar label { flex: 1 1 280px; }
+  .cs-toolbar select { min-width: 0; }
+  .cs-toolbar > .btn { flex: 0 1 auto; }
+  .cs-usage { flex: 1 0 100%; margin-left: 0; grid-template-columns: auto 1fr; align-items: center; }
+  .cs-columns { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .channel-studio { padding-bottom: 16px; }
+  .cs-hero { flex-direction: column; gap: 12px; padding: 14px 0 16px; }
+  .cs-local { align-self: flex-start; }
+  .cs-toolbar { gap: 10px; padding: 10px; }
+  .cs-toolbar label { flex-basis: 100%; }
+  .cs-toolbar > .btn { flex: 1 1 0; min-width: 0; }
+  .cs-tabs { margin-inline: -2px; padding-inline: 2px; }
+  .cs-tabs-list,
+  .base-tabs-list { gap: 16px; overflow-x: auto; scrollbar-width: none; }
+  .cs-tabs-list::-webkit-scrollbar,
+  .base-tabs-list::-webkit-scrollbar { display: none; }
+  .cs-card { padding: 16px; border-radius: 12px; }
+  .cs-field-row { grid-template-columns: 1fr; gap: 4px; }
+  .cs-script-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .cs-actions { align-items: stretch; }
+  .cs-actions > .btn,
+  .cs-actions > a.btn { width: 100%; }
+  .cs-section-heading { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cs-section-heading > .btn { width: 100%; }
+  .cs-stat-row { grid-template-columns: 1fr; }
+  .cs-stat-row div { grid-template-columns: auto 1fr; align-items: baseline; }
+  .cs-stat-row b { text-align: right; }
+  .cs-character { align-items: flex-start; }
+  .cs-character > div:last-child { min-width: 0; }
+  .cs-character .cs-actions { flex-direction: column; align-items: stretch; }
+  .cs-character .cs-actions .btn { width: 100%; }
+  .cs-list-item { gap: 12px; }
+  .cs-list-item > span:last-child { white-space: nowrap; }
+  .cs-modal { padding: 8px; }
+  .cs-modal > .cs-card { padding: 14px; }
+}
+
+@media (max-width: 400px) {
+  .cs-card { padding: 12px; }
+  .cs-toolbar { padding: 8px; }
+  .cs-toolbar > .btn { padding-inline: 8px; font-size: 11px; }
+  .cs-tabs-list,
+  .base-tabs-list { gap: 12px; }
+}
