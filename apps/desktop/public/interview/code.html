@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aivatar code evidence</title>
+<style>body{margin:0;padding:40px;background:#171717;color:#f4f4f5;font:16px/1.5 system-ui,sans-serif}main{max-width:1000px;margin:auto}pre{overflow:auto;padding:20px;border-radius:12px;background:#090909;color:#d4d4d8}code{font-family:ui-monospace,monospace;font-size:13px}a{color:#7dd3fc}.meta{color:#a1a1aa}</style></head>
+<body><main><p class="meta">AIVATAR · REPRESENTATIVE CODE</p><h1>Provider routing and failure recovery</h1>
+<p>These excerpts show the provider boundary, exact scene-audio segmentation, and resumable queue behavior. Credentials stay server-side.</p>
+<h2>Presenter orchestration</h2><pre><code>segment_path = dirs["audio"] / "presenter_segments" / f"scene_{scene.ordinal:03}.wav"
+cut_audio_segment(Path(master.path), scene.start, scene.end, segment_path)
+
+for candidate in _provider_attempts(primary, allow_fallback):
+    try:
+        result = presenter_provider(candidate).generate(
+            segment_path,
+            scene.end - scene.start,
+            dirs["presenter"],
+            project_id=project.id,
+            scene_id=scene.id,
+            reference_image_path=avatar.reference_image_path,
+        )
+        resolved_provider = candidate
+        break
+    except (ProviderUnavailable, FileNotFoundError, RuntimeError, TimeoutError) as exc:
+        failures.append(f"{candidate}: {exc}")</code></pre>
+<h2>What this demonstrates</h2><ul><li>One authoritative narration timeline</li><li>Provider-specific adapters behind a common interface</li><li>Retry/fallback handling without rebuilding the entire project</li><li>Scene-level metadata and cost tracking</li></ul>
+<p class="meta">AI-assisted coding tools helped with boilerplate and debugging suggestions. The architecture, integration, and verification were reviewed manually.</p>
+</main></body></html>
