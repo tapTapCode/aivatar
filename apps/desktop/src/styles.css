@@ -505,3 +505,98 @@ dialog form { position: relative; width: min(420px,92vw); padding: 24px; }
 .aivatar-driver-popover .driver-popover-close-btn {
   color: #aeb8c3;
 }
+
+/* Responsive layout pass: keep the Basalt-inspired shell usable from phones
+   through wide desktop while preserving compact controls and safe overflow. */
+.main-content,
+.view,
+.page-header,
+.section,
+.panel,
+.tool-card,
+.template-card,
+.project-card,
+.page-header > div:first-child,
+.section-heading > div {
+  min-width: 0;
+}
+.lede,
+.section-heading p,
+.project-empty,
+.getting-started,
+.table-wrap {
+  overflow-wrap: anywhere;
+}
+.table-wrap { max-width: 100%; overscroll-behavior-inline: contain; }
+
+@media (max-width: 1100px) {
+  .create-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .studio-grid { grid-template-columns: minmax(250px, 340px) minmax(0, 1fr); }
+}
+
+@media (max-width: 860px) {
+  .app-shell { display: block; min-height: 100vh; }
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 30;
+    width: min(280px, 84vw);
+    transform: translateX(-104%);
+    transition: transform .2s ease;
+    box-shadow: 18px 0 50px rgba(0, 0, 0, .35);
+  }
+  .nav-open .sidebar { transform: translateX(0); }
+  .nav-open .nav-backdrop { display: block; position: fixed; inset: 0; z-index: 25; background: rgba(0, 0, 0, .54); }
+  .mobile-menu { display: inline-grid; flex: 0 0 auto; }
+  .topbar { padding-inline: 20px; }
+  .view { padding-inline: 20px; }
+  .page-header { gap: 16px; }
+  .page-header .header-actions { flex: 0 0 auto; }
+  .studio-grid { grid-template-columns: 1fr; }
+  .preview-panel { min-height: 280px; }
+}
+
+@media (max-width: 720px) {
+  .topbar { gap: 10px; padding-inline: 14px; }
+  .command-trigger { width: auto; min-width: 0; flex: 1; }
+  .command-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .command-trigger kbd { display: none; }
+  .topbar-actions { flex: 0 0 auto; }
+  .page-header { flex-direction: column; align-items: stretch; }
+  .page-header .header-actions { width: 100%; }
+  .page-header .header-actions > * { flex: 1 1 0; }
+  .create-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .template-rail { grid-auto-columns: minmax(220px, 72vw); }
+  .getting-started { grid-template-columns: 1fr; gap: 16px; }
+  .step-list { flex-wrap: wrap; }
+  .control-row { grid-template-columns: 1fr; }
+  .scene-plan-row { grid-template-columns: 24px minmax(95px, .45fr) minmax(0, 1fr); }
+  .project-empty { align-items: flex-start; flex-direction: column; }
+  .project-empty .btn { width: 100%; }
+  .dialog-actions { flex-wrap: wrap; }
+  .dialog-actions .btn { flex: 1 1 140px; }
+}
+
+@media (max-width: 520px) {
+  .topbar { height: 56px; padding-inline: 10px; }
+  .view { padding: 22px 12px 36px; }
+  .page-header { margin-bottom: 24px; }
+  .page-header h1 { font-size: clamp(25px, 8vw, 32px); }
+  .page-header .header-actions { flex-direction: column; align-items: stretch; }
+  .page-header .header-actions > * { width: 100%; }
+  .create-grid,
+  .project-grid { grid-template-columns: 1fr; }
+  .tool-card { min-height: 132px; }
+  .template-rail { grid-auto-columns: minmax(230px, 86vw); }
+  .panel,
+  .getting-started { padding: 16px; border-radius: 12px; }
+  .dialog-actions { flex-direction: column-reverse; }
+  .dialog-actions .btn { width: 100%; flex-basis: auto; }
+  .scene-plan-row { grid-template-columns: 24px minmax(0, 1fr); }
+  .scene-plan-row input,
+  .scene-plan-row select { grid-column: 2; }
+  .timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .table-wrap table { min-width: 640px; }
+}
