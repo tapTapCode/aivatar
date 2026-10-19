@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Aivatar desktop capability set",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        { "name": "binaries/aivatar-api", "sidecar": true }
+      ]
+    }
+  ]
+}

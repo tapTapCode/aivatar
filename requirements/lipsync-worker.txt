@@ -1,3 +1,0 @@
-# MuseTalk is installed from its official repository at the revision declared by
-# MUSETALK_MODEL_REVISION. Its upstream requirements are installed while building
-# the worker image; they intentionally remain isolated from the control plane.
